@@ -3,16 +3,16 @@ services:
   - docker
 
 before_install:
-  - docker build -t react/tests -f ./client/Dockerfile ./client
+  - docker build -t react:tests -f ./client/Dockerfile ./client
 
 script:
-  - docker run -e CI=true react/tests npm run test -- --coverage
+  - docker run -e CI=true react:tests npm run test -- --coverage
 
 after_success:
-  - docker build -t react/client ./client 
-  - docker build -t react/nginx ./nginx
-  - docker build -t react/server ./server
-  - docker build -t react/worker ./worker
+  - docker build -t react:client ./client 
+  - docker build -t react:nginx ./nginx
+  - docker build -t react:server ./server
+  - docker build -t react:worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
   - docker push react/client
   - docker push react/nginx
