@@ -11,10 +11,10 @@ script:
 after_success:
   - docker build -t danielvnanok/client ./client 
   - docker build -t danielvnanok/nginx ./nginx
-  - docker build -t danielvnanok/server ./server
+  - docker build -t danielvnanok/api ./server
   - docker build -t danielvnanok/worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID"  --password-stdin
   - docker push danielvnanok/client
   - docker push danielvnanok/nginx
-  - docker push danielvnanok/server
+  - docker push danielvnanok/api
   - docker push danielvnanok/worker
