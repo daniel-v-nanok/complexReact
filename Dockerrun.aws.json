@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+      {
+        "name": "client",
+        "image": "danielvnanok/client",
+        "hostname": "client",
+        "essential": false
+      },
+      {
+        "name": "server",
+        "image": "danielvnanok/api",
+        "hostname": "api",
+        "essential": false
+      },
+      {
+        "name": "worker",
+        "image": "danielvnanok/worker",
+        "hostname": "worker",
+        "essential": false
+      },
+      {
+        "name": "nginx",
+        "image": "danielvnanok/nginx",
+        "hostname": "nginx",
+        "essential": true,
+        "portMappings": [
+            {
+              "hostPort": 80,
+              "containerPort": 80
+            }
+        ],
+        "links": ["client", "server"]
+      }
+    ]
+}

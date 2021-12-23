@@ -18,3 +18,17 @@ after_success:
   - docker push danielvnanok/nginx
   - docker push danielvnanok/api
   - docker push danielvnanok/worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: multi-docker
+  env: Multi-docker-env
+  bucket_name: elasticbeanstalk-us-east-1-894244321548
+  bucket_path: docker-multi
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: $AWS_SECRET_KEY
